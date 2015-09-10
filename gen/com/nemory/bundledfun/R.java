@@ -16,64 +16,75 @@ public final class R {
     }
     public static final class drawable {
         public static final int android_logo=0x7f020000;
-        public static final int ic_action_search=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int id_blank=0x7f020003;
-        public static final int splash1=0x7f020004;
-        public static final int splash2=0x7f020005;
-        public static final int splash3=0x7f020006;
+        public static final int bundledfun=0x7f020001;
+        public static final int devs=0x7f020002;
+        public static final int ic_action_search=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int id_blank=0x7f020005;
     }
     public static final class id {
-        public static final int btnA=0x7f09000e;
-        public static final int btnB=0x7f09000f;
-        public static final int btnC=0x7f090010;
+        public static final int btnA=0x7f090013;
+        public static final int btnB=0x7f090014;
+        public static final int btnC=0x7f090015;
+        public static final int btnContactDeveloper=0x7f09000c;
         public static final int btnLogin=0x7f090005;
-        public static final int btnMaps=0x7f090007;
-        public static final int btnOptions=0x7f090008;
-        public static final int btnPlay=0x7f090006;
-        public static final int btnSkip=0x7f090011;
-        public static final int chTimeElapsed=0x7f090015;
+        public static final int btnLogout=0x7f090008;
+        public static final int btnMaps=0x7f090009;
+        public static final int btnPlay=0x7f090007;
+        public static final int btnRegister=0x7f090006;
+        public static final int btnSettings=0x7f09000a;
+        public static final int btnSkip=0x7f090016;
+        public static final int btnUnSync=0x7f09000b;
+        public static final int chTimeElapsed=0x7f09001a;
+        public static final int chkStreamOnline=0x7f09000d;
+        public static final int etEmail=0x7f09001e;
+        public static final int etHostName=0x7f090002;
+        public static final int etName=0x7f09001d;
         public static final int etPassword=0x7f090004;
-        public static final int etSearchStudent=0x7f09001d;
-        public static final int ivIDPicture=0x7f090001;
-        public static final int ivPic=0x7f090017;
-        public static final int ivSplashImage=0x7f09001a;
-        public static final int lChoices=0x7f09000d;
-        public static final int lMain=0x7f090009;
-        public static final int lQuestionContainer=0x7f09000a;
-        public static final int lStatus=0x7f090012;
-        public static final int listStudents=0x7f09001e;
-        public static final int menu_quit=0x7f090022;
-        public static final int menu_settings=0x7f09001f;
-        public static final int menu_share=0x7f090021;
-        public static final int menu_students=0x7f090020;
-        public static final int mvMap=0x7f09000c;
-        public static final int mvMap1=0x7f090000;
-        public static final int spSchoolLevel=0x7f09001b;
-        public static final int spYearLevel=0x7f09001c;
-        public static final int tvCorrectAnswers=0x7f090016;
-        public static final int tvHighScore=0x7f090019;
-        public static final int tvID=0x7f090003;
-        public static final int tvName=0x7f090002;
-        public static final int tvPass=0x7f090018;
-        public static final int tvQuestion=0x7f09000b;
-        public static final int tvScore=0x7f090014;
-        public static final int tvTimer=0x7f090013;
+        public static final int etSearchStudent=0x7f090023;
+        public static final int etUsername=0x7f090003;
+        public static final int ivPicture=0x7f090000;
+        public static final int ivSplashImage=0x7f090020;
+        public static final int lChoices=0x7f090012;
+        public static final int lMain=0x7f09000f;
+        public static final int lQuestionContainer=0x7f090010;
+        public static final int lStatus=0x7f090017;
+        public static final int listGroups=0x7f09001f;
+        public static final int listStudents=0x7f090024;
+        public static final int menu_pause_resume=0x7f090028;
+        public static final int menu_quit=0x7f09002a;
+        public static final int menu_report=0x7f090027;
+        public static final int menu_restart=0x7f090029;
+        public static final int menu_settings=0x7f090026;
+        public static final int mvMap1=0x7f09000e;
+        public static final int spSchoolLevel=0x7f090021;
+        public static final int spYearLevel=0x7f090022;
+        public static final int tvCorrectAnswers=0x7f09001b;
+        public static final int tvGroup=0x7f09001c;
+        public static final int tvID=0x7f090025;
+        public static final int tvName=0x7f090001;
+        public static final int tvQuestion=0x7f090011;
+        public static final int tvScore=0x7f090019;
+        public static final int tvTimer=0x7f090018;
     }
     public static final class layout {
-        public static final int activity_osmdroid=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int menu=0x7f030003;
-        public static final int quiz=0x7f030004;
-        public static final int row_layout=0x7f030005;
-        public static final int splash=0x7f030006;
-        public static final int tweets=0x7f030007;
-        public static final int users=0x7f030008;
+        public static final int activity_login=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_menu=0x7f030002;
+        public static final int activity_osmdroid=0x7f030003;
+        public static final int activity_quiz=0x7f030004;
+        public static final int activity_registration=0x7f030005;
+        public static final int activity_splash=0x7f030006;
+        public static final int activity_tweets=0x7f030007;
+        public static final int activity_users=0x7f030008;
+        public static final int row_layout=0x7f030009;
     }
     public static final class menu {
         public static final int activity_osmdroid=0x7f080000;
-        public static final int nav_bar=0x7f080001;
+        public static final int activity_preference=0x7f080001;
+        public static final int activity_preferences=0x7f080002;
+        public static final int activity_registration=0x7f080003;
+        public static final int nav_bar=0x7f080004;
     }
     public static final class raw {
         public static final int bgmusic=0x7f050000;
@@ -84,9 +95,15 @@ public final class R {
         public static final int app_name=0x7f070000;
         public static final int hello_world=0x7f070001;
         public static final int menu_settings=0x7f070002;
+        public static final int title_activity_options=0x7f070006;
         public static final int title_activity_osmdroid=0x7f070003;
+        public static final int title_activity_preference=0x7f070008;
+        public static final int title_activity_preferences=0x7f070007;
+        public static final int title_activity_registration=0x7f070009;
+        public static final int title_item_detail=0x7f070004;
+        public static final int title_item_list=0x7f070005;
     }
     public static final class xml {
-        public static final int preference=0x7f040000;
+        public static final int prefs_settings=0x7f040000;
     }
 }

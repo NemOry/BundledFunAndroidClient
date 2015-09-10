@@ -1,63 +1,97 @@
 package com.nemory.bundledfun.helpers;
 
+import java.io.File;
+
+import android.os.Environment;
 
 public class Constants{
 
 	//DATABASE VARIABLES
-	public static final String DATABASE_NAME 	= "dbBundledFun";
-	public static final int	   DATABASE_VERSION = 1;
-	
-	//TABLES
-	public static final String TABLE_QUESTIONS 		= "tblQuestions";
-	public static final String TABLE_STUDENTS 		= "tblStudents";
-	public static final String TABLE_ADMINISTRATOR 	= "tblAdministrators";
-
-	//QUESTION COLUMNS
-	public static final String C_QUESTION_ID 			= "QuestionID";
-	public static final String C_QUESTION_TEXT 			= "Text";
-	public static final String C_QUESTION_SCHOOL_LEVEL	= "SchoolLevel";
-	public static final String C_QUESTION_YEAR_LEVEL	= "YearLevel";
-	public static final String C_QUESTION_STATUS 		= "Status";
-	public static final String C_QUESTION_ANSWER 		= "CorrectAnswer";
-	public static final String C_QUESTION_CHOICE_A 		= "A";
-	public static final String C_QUESTION_CHOICE_B 		= "B";
-	public static final String C_QUESTION_CHOICE_C 		= "C"; 
-	public static final String C_QUESTION_FILE 			= "File";
-	public static final String C_QUESTION_FILE_TYPE 	= "FileType";
-	public static final String C_QUESTION_SCORE_POINTS 	= "ScorePoints";
-	public static final String C_QUESTION_TIMER_SECS 	= "TimerSecs";
+	public static final String DATABASE_NAME 			= "db_bundledfun";
+	public static final int	   DATABASE_VERSION 		= 1;
+	public static final String TABLE_USERS 				= "tbl_users";
     
-	//STUDENT COLUMNS
-	public static final String C_STUDENT_ID 				= "StudentID";
-	public static final String C_STUDENT_PASS 				= "Password"; 
-	public static final String C_STUDENT_NAME 				= "Name";
-	public static final String C_STUDENT_SCHOOL_LEVEL 		= "SchoolLevel";
-	public static final String C_STUDENT_YEAR_LEVEL 		= "YearLevel";
-	public static final String C_STUDENT_ID_PICTURE 		= "IDPicture";
-	public static final String C_STUDENT_TIME_ELAPSED 		= "TimeElapsed";
-	public static final String C_STUDENT_CORRECT_ANSWERS 	= "CorrectAnswers";
-	public static final String C_STUDENT_HIGH_SCORE 		= "HighScore";
-	
-	//ADMINISTRATOR COLUMNS
-	public static final String C_ADMIN_ID 			= "AdminID";
-	public static final String C_ADMIN_PASS 		= "Password";
-	public static final String C_ADMIN_NAME 		= "Name";
-	public static final String C_ADMIN_ID_PICTURE 	= "IDPicture";
-	public static final String C_ADMIN_HIGH_SCORE 	= "HighScore";
+	//USER COLUMNS
+	public static final String C_USER_ID 				= "user_id";
+	public static final String C_USER_PASS 				= "password"; 
+	public static final String C_USER_NAME 				= "name";
+	public static final String C_USER_PICTURE 			= "picture";
+	public static final String C_USER_TIME_ELAPSED 		= "time_elapsed";
+	public static final String C_USER_CORRECT_ANSWERS 	= "correct_answers";
+	public static final String C_USER_HIGH_SCORE 		= "high_score";
 
 	// PREFS KEYS
-	public static final String	KEY_PREFS_SOUND = "key_prefs_sounds";
-
-	// SECONDS CONSTANT
-	public static final int	_10_SECONDS = 10000;
-	public static final int	_20_SECONDS = 20000;
-	public static final int	_30_SECONDS = 30000;
-	public static final int	_40_SECONDS = 40000;
-	public static final int	_50_SECONDS = 50000;
-	public static final int	_60_SECONDS = 60000;
-	
-	// QUESTIONS LIMIT PER GAME
-	public static final int	QUESTIONS_LIMIT = 100;
+	public static final String	KEY_PREFS_SYNCED 		= "key_prefs_synced";
+	public static final String	KEY_PREFS_USERNAME 		= "key_prefs_username";
+	public static final String	KEY_PREFS_PASSWORD 		= "key_prefs_password";
+	public static final String	KEY_PREFS_CHECK_UPDATES	= "key_prefs_check_updates";
+	public static final String 	KEY_PREFS_ID 			= "key_prefs_group_id";
 	
 	public static final String DATAPATH = "sdcard/.BundledFun/";
+	public static final String BUNDLEDFUN_FOLDER = ".BundledFun";
+	
+	public static String HOST_NAME = "";
+	
+	public static void createFolders(){
+		String sdcardPath = Environment.getExternalStorageDirectory() + File.separator;
+		String rootPath = ".BundledFun/";
+		
+		File files = new File(sdcardPath + rootPath + "files");
+		File users = new File(sdcardPath + rootPath + "files" + File.separator + "users");
+		File questions = new File(sdcardPath + rootPath + "files" + File.separator + "questions");
+		
+		File[] folders = {files, questions, users};
+		
+		for(File f : folders){
+			f.mkdirs();
+		}
+	}
+	
+	public static void deleteFiles(File folder){
+		
+		if (!folder.exists()){
+            return;
+		}
+		
+		for (File file1 : folder.listFiles()) { // files inside /.BundledFun/
+        	if(file1.isDirectory()){
+        		for (File file2 : file1.listFiles()) { // Files inside /files/
+        			if(file2.isDirectory()){
+	        			for (File file3 : file2.listFiles()) { // files inside /questions/ and /users/
+	        				file3.delete();
+	                    }
+        			}
+                }
+        	}
+        }
+		
+        folder.delete();
+        
+	}
+	
+	public static int countFiles(File bundledFun){
+		
+		int totalFiles = 0;
+		
+		if (!bundledFun.exists()){
+            return 0;
+		}
+		
+		boolean hasIterated = false;
+		
+		for (File easyMediumHardUsers : bundledFun.listFiles()) {
+        	if(easyMediumHardUsers.isDirectory()){
+        		for (File videosImagesAudios : easyMediumHardUsers.listFiles()) {
+        			totalFiles += videosImagesAudios.listFiles().length;
+                }
+        		
+        		if(easyMediumHardUsers.equals("users") && !hasIterated){
+        			totalFiles += easyMediumHardUsers.listFiles().length;
+        			hasIterated = true;
+        		}
+        	}
+        }
+		
+		return totalFiles;
+	}
 }

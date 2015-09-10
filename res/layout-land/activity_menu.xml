@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="180px" >
+
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+    <Button
+        android:id="@+id/btnMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maps"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnUnSync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UnSync"
+        android:visibility="gone" />
+    
+    <Button
+        android:id="@+id/btnContactDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Developer" />
+
+    <CheckBox
+        android:id="@+id/chkStreamOnline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Use Online Questions" />
+
+</LinearLayout>

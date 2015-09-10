@@ -1,28 +1,40 @@
 package com.nemory.bundledfun.objects;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+
+import android.os.Environment;
+import android.util.Log;
+
+import com.nemory.bundledfun.helpers.Constants;
+import com.nemory.bundledfun.tools.JSONParser;
 
 public class Question {
-
+	
 	private String 	text;
 	private String 	difficulty;
 	private String 	answer;
 	private String 	choice_a;
 	private String 	choice_b;
 	private String 	choice_c;
-	private String 	file_name;
+	private String 	file;
 	private String 	type;
 	private int 	points;
 	private int 	timer;
 	
+	public static int total_score = 0;
+	
 	public static ArrayList<Question> questions = new ArrayList<Question>();
 	
-	public static void shuffle(){
-		Collections.shuffle(questions);
-	}
-	
 	/** ------------ SETTERS AND GETTERS ------------ **/
+	
+	public static int getTotalScore(){
+		int totalScore = 0;
+		for(Question q : questions){
+			totalScore += q.getPoints();
+		}
+		return totalScore;
+	}
 	
 	public String getText() {
 		return text;
@@ -56,10 +68,10 @@ public class Question {
 		this.choice_c = choice_c;
 	}
 	public String getFileName() {
-		return file_name;
+		return file;
 	}
-	public void setFile(String file_name) {
-		this.file_name = file_name;
+	public void setFile(String file) {
+		this.file = file;
 	}
 	public String getType() {
 		return type;
@@ -88,4 +100,14 @@ public class Question {
 		this.difficulty = difficulty;
 	}
 	
+	public static void bind(){
+		String path = Environment.getExternalStorageDirectory() + File.separator + Constants.BUNDLEDFUN_FOLDER + File.separator;
+		File questions = new File(path + "files" + File.separator + "questions.json");
+
+		if(questions.exists()){
+			Question.questions 	= JSONParser.parseQuestions();
+		}else{
+			Log.d("MISSING FILE", questions.getAbsolutePath());
+		}
+	}
 }

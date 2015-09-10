@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -23,44 +22,24 @@ import org.json.JSONObject;
 
 import android.os.Environment;
 
+import com.nemory.bundledfun.objects.Group;
+import com.nemory.bundledfun.objects.MyFile;
 import com.nemory.bundledfun.objects.Question;
 import com.nemory.bundledfun.objects.User;
 
 public class JSONParser {
-	
-//	try {
-//
-//        File dir = Environment.getExternalStorageDirectory();
-//        File yourFile = new File(dir, ".BundledFun/data/questions.json");
-//        FileInputStream stream = new FileInputStream(yourFile);
-//        String jString = null;
-//        
-//        try {
-//            FileChannel fc = stream.getChannel();
-//            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-//            jString = Charset.defaultCharset().decode(bb).toString();
-//          }
-//          finally {
-//            stream.close();
-//          }
-//        
-//        Log.d("JSON", jString);
-//
-//        JSONArray jObject = new JSONArray(jString); 
-//
-//    } catch (Exception e) {e.printStackTrace();}
-	
+
 	public static ArrayList<User> parseUsers() {
 		
 		ArrayList<User> users = new ArrayList<User>();
 		
 		String jsonString = "";
-		
-		try {
 
+		try {
+			
 	        File dir = Environment.getExternalStorageDirectory();
-	        File yourFile = new File(dir, ".BundledFun/users/users.json");
-	        FileInputStream stream = new FileInputStream(yourFile);
+	        File file = new File(dir, ".BundledFun/files/users.json");
+	        FileInputStream stream = new FileInputStream(file);
 	        
 	        try{
 	            FileChannel fc = stream.getChannel();
@@ -81,13 +60,16 @@ public class JSONParser {
 			for(int i = 0; i < jsonArray.length(); i++){
 				JSONObject obj = jsonArray.getJSONObject(i);
 				User user = new User();
-				user.setId(obj.getString("ID"));
-				user.setName(obj.getString("NAME"));
-				user.setPass(obj.getString("PASS"));
-				user.setPicture(obj.getString("PICTURE"));
-				user.setTimeElapsed(obj.getString("TIME_ELAPSED"));
-				user.setCorrectAnswers(obj.getInt("CORRECT_ANSWERS"));
-				user.setHighScore(obj.getInt("HIGH_SCORE"));
+				user.setId(obj.getInt("id"));
+				user.setUsername(obj.getString("username"));
+				user.setGroupId(obj.getInt("group_id"));
+				user.setLevel(obj.getInt("level"));
+				user.setAccessToken(obj.getString("access_token"));
+				user.setName(obj.getString("name"));
+				user.setPassword(obj.getString("password"));
+				user.setPicture(obj.getString("picture"));
+				user.setEmail(obj.getString("email"));
+				user.setAccess(obj.getInt("access"));
 				users.add(user);
 			}
 			
@@ -100,52 +82,33 @@ public class JSONParser {
 		return users;
 	}
 	
-	public static ArrayList<User> parseStudent(InputStream inputStream) {
-		
-		ArrayList<User> users = new ArrayList<User>();
-		
-		try {
-			int size = inputStream.available();
-			byte[] buffer = new byte[size];
-			inputStream.read(buffer);
-			inputStream.close();
-			String bufferString = new String(buffer);
-			JSONArray jsonArray = new JSONArray(bufferString);
-			
-			for(int i = 0; i < jsonArray.length(); i++){
-				JSONObject obj = jsonArray.getJSONObject(i);
-				User user = new User();
-				user.setId(obj.getString("ID"));
-				user.setName(obj.getString("NAME"));
-				user.setPass(obj.getString("PASS"));
-				user.setPicture(obj.getString("PICTURE"));
-				user.setTimeElapsed(obj.getString("TIME_ELAPSED"));
-				user.setCorrectAnswers(obj.getInt("CORRECT_ANSWERS"));
-				user.setHighScore(obj.getInt("HIGH_SCORE"));
-				users.add(user);
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return users;
-	}
-	
-	public static ArrayList<Question> parseQuestion(InputStream inputStream) {
+	public static ArrayList<Question> parseQuestions() {
 		
 		ArrayList<Question> questions = new ArrayList<Question>();
-
+		String jsonString = "";
+		
 		try {
-			int size = inputStream.available();
-			byte[] buffer = new byte[size];
-			inputStream.read(buffer);
-			inputStream.close();
-			String bufferString = new String(buffer);
-			JSONArray jsonArray = new JSONArray(bufferString);
+			
+		 	File dir = Environment.getExternalStorageDirectory();
+	        File file = new File(dir, ".BundledFun/files/questions.json");
+	        FileInputStream stream = new FileInputStream(file);
+	        
+	        try{
+	            FileChannel fc = stream.getChannel();
+	            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+	            jsonString = Charset.defaultCharset().decode(bb).toString();
+	        } catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+	            try {
+					stream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
 
+			JSONArray jsonArray = new JSONArray(jsonString);
+			
 			for(int i = 0; i < jsonArray.length(); i++){
 				JSONObject obj = jsonArray.getJSONObject(i);
 				Question q = new Question();
@@ -155,7 +118,7 @@ public class JSONParser {
 				q.setChoice_a(obj.getString("choice_a"));
 				q.setChoice_b(obj.getString("choice_b"));
 				q.setChoice_c(obj.getString("choice_c"));
-				q.setFile(obj.getString("file_name"));
+				q.setFile(obj.getString("file"));
 				q.setType(obj.getString("type"));
 				q.setScore_points(obj.getInt("points"));
 				q.setTimer(obj.getInt("timer"));
@@ -171,13 +134,81 @@ public class JSONParser {
 		return questions;
 	}
 	
-	public static JSONArray getJSONFromURL(String url) throws ClientProtocolException, IOException, JSONException {
+	public static ArrayList<MyFile> parseFiles() {
+		
+		ArrayList<MyFile> files = new ArrayList<MyFile>();
+		
+		String jsonString = "";
+		
+		try {
+			
+	        File dir = Environment.getExternalStorageDirectory();
+	        File file = new File(dir, ".BundledFun/files/files.json");
+	        FileInputStream stream = new FileInputStream(file);
+	        
+	        try{
+	            FileChannel fc = stream.getChannel();
+	            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+	            jsonString = Charset.defaultCharset().decode(bb).toString();
+	        } catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+	            try {
+					stream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
+
+			JSONArray jsonArray = new JSONArray(jsonString);
+
+			for(int i = 0; i < jsonArray.length(); i++){
+				JSONObject obj = jsonArray.getJSONObject(i);
+				MyFile myFile = new MyFile();
+				myFile.setType(obj.getString("type"));
+				myFile.setCount(Integer.parseInt(obj.getString("count")));
+				files.add(myFile);
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return files;
+	}
+	
+	public static ArrayList<Group> parseGroups(String jsonString) {
+		
+		ArrayList<Group> groups = new ArrayList<Group>();
+		
+		try {
+
+			JSONArray jsonArray = new JSONArray(jsonString);
+
+			for(int i = 0; i < jsonArray.length(); i++){
+				JSONObject obj = jsonArray.getJSONObject(i);
+				Group group = new Group();
+				group.setID(obj.getInt("id"));
+				group.setName(obj.getString("name"));
+				groups.add(group);
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return groups;
+	}
+
+	public static JSONArray getJSONArrayFromURL(String url) throws ClientProtocolException, IOException, JSONException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(url);
 		HttpResponse response = client.execute(get);
 		HttpEntity entity = response.getEntity();
-		String data = EntityUtils.toString(entity);
-		JSONArray users = new JSONArray(data);
-		return users;
+		String jsonString = EntityUtils.toString(entity);
+		JSONArray data = new JSONArray(jsonString);
+		return data;
 	}
 }

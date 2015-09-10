@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	
-    <item
-        android:id="@+id/menu_students"
-        android:icon="@android:drawable/ic_menu_edit"
+     <item
+        android:id="@+id/menu_report"
         android:showAsAction="ifRoom|withText"
-        android:title="Students"/>
-    
+        android:title="Report"/>
+     
     <item
-        android:id="@+id/menu_share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:id="@+id/menu_pause_resume"
+        android:icon="@android:drawable/ic_media_pause"
         android:showAsAction="ifRoom|withText"
-        android:title="Share"/>
+        android:title="Pause"/>
+    <item
+        android:id="@+id/menu_restart"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:showAsAction="ifRoom|withText"
+        android:title="Restart"/>
     <item
         android:id="@+id/menu_quit"
         android:icon="@android:drawable/ic_lock_power_off"

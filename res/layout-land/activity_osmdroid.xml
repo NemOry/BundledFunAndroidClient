@@ -3,11 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-        <org.osmdroid.views.MapView
+    
+    <org.osmdroid.views.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mvMap1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
         </org.osmdroid.views.MapView>
+   
+
+<!--     <com.google.android.maps.MapView
+        android:id="@+id/mvMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:apiKey="0QYoB9ICYqkV11f0imnpZYeU8l-bU3bWdifQ1Mg"
+        android:clickable="true"
+        android:state_enabled="true" /> -->
 
 </RelativeLayout>
